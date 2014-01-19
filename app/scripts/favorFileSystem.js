@@ -1,5 +1,6 @@
 'use strict';
-app.factory('FileSystemModel',function($rootScope){
+angular.module('Favor.FileSystemManager',[])
+.factory('FavorFileSystemModel',function($rootScope){
 	var tree_list = [];
 	var FileSystemObj = {};
 
@@ -78,4 +79,45 @@ app.factory('FileSystemModel',function($rootScope){
 	}
 
 	return FileSystemObj;
+})
+.controller('FavorFileSystem',function($scope,FavorFileSystemModel){
+			
+	$scope.explorer=[];
+	$scope.path='';
+	function returnFiles(tree){
+		$scope.explorer=tree;
+	}
+
+	$scope.openFile = function(){
+			var tree = FavorFileSystemModel.get($scope.path);
+			returnFiles(tree);
+	};
+
+	
+	$scope.treeSelected = function(branch){
+		
+		if(branch.isDirectory){
+			$scope.$apply(function(){
+				branch.expanded= !branch.expanded;
+			});
+		}
+		if(!branch.isDirectory){
+			//FileModel.openFile(branch.path);
+		}
+	}
+
+	$scope.fileSaveAs = function(){
+		FavorFileSystemModel.saveFile($scope.savePath, $scope.fileToSave);
+		$scope.savePath='';
+		$scope.fileToSave='';
+	}
+	$scope.$on('saveAs', function(event,file){
+		$scope.fileToSave = file;
+		document.getElementById('saveFile').click();
+	});
+
+
+	$scope.$on('viewFoldersChanged',function(){
+		$scope.foldersVisible = FavorFileSystemModel.folderVisibility();
+	});
 });

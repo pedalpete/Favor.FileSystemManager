@@ -128,6 +128,17 @@ var config = {
 			"angular":">=1.2.x"
 		},
 		"angularModule":true
+	},
+	"Favor.FileSystemManager": {
+		"name":"Favor.FileSystemManager",
+		"version":"0.0.1",
+		"jsPaths":[
+			"scripts/favorFileSystem.js"
+		],
+		"dependencies":{
+			"angular":">=1.2.x"
+		},
+		"angularModule":true
 	}
 
 }

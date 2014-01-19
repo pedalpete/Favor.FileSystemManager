@@ -14,11 +14,12 @@
    
     <!-- endbuild -->
   </head>
-  <body ng-app>
+  <body ng-app="app">
   
- 
-  <h1>This is the starting point for a new module</h1>
-
+    <div ng-controller="FavorFileSystem">
+    
+        <input type="file" ng-model="path" ng-change="openFile()" nwdirectory/>
+    </div>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -42,7 +43,7 @@
       favorModuleManager.buildScriptObj();
       favorModuleManager.addScriptsToPage();
       var angularModules = favorModuleManager.angularDependencies();
-      var app = angular.module('favorIde',angularModules);
+      var app = angular.module('app',angularModules);
       var gui = require('nw.gui');
       var fs = require('fs');
 
