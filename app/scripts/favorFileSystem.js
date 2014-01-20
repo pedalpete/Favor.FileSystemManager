@@ -1,5 +1,5 @@
 'use strict';
-angular.module('Favor.FileSystemManager',[])
+angular.module('Favor.FileSystemManager',["angularBootstrapNavTree"])
 .factory('FavorFileSystemModel',function($rootScope){
 	var tree_list = [];
 	var FileSystemObj = {};
@@ -85,11 +85,13 @@ angular.module('Favor.FileSystemManager',[])
 	$scope.explorer=[];
 	$scope.path='';
 	function returnFiles(tree){
-		$scope.explorer=tree;
+		$scope.$apply(function(){
+			$scope.explorer=tree;
+		});
 	}
 
-	$scope.openFile = function(){
-			var tree = FavorFileSystemModel.get($scope.path);
+	$scope.openFile = function(path){
+			var tree = FavorFileSystemModel.get(path);
 			returnFiles(tree);
 	};
 
@@ -102,7 +104,7 @@ angular.module('Favor.FileSystemManager',[])
 			});
 		}
 		if(!branch.isDirectory){
-			//FileModel.openFile(branch.path);
+			FavorFileSystemModel.openFile(branch.path);
 		}
 	}
 
