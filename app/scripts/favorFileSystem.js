@@ -1,5 +1,5 @@
 'use strict';
-angular.module('Favor.FileSystemManager',["angularBootstrapNavTree"])
+angular.module('Favor.FileSystemManager',[])
 .factory('FavorFileSystemModel',function($rootScope){
 	var tree_list = [];
 	var FileSystemObj = {};
@@ -80,9 +80,10 @@ angular.module('Favor.FileSystemManager',["angularBootstrapNavTree"])
 
 	return FileSystemObj;
 })
-.controller('FavorFileSystem',function($scope,FavorFileSystemModel){
+.controller('FavorFileSystemCtrl',function($scope,FavorFileSystemModel){
 			
 	$scope.explorer=[];
+	$scope.searchTree=[];
 	$scope.path='';
 	function returnFiles(tree){
 		$scope.$apply(function(){
@@ -113,6 +114,32 @@ angular.module('Favor.FileSystemManager',["angularBootstrapNavTree"])
 		$scope.savePath='';
 		$scope.fileToSave='';
 	}
+
+	function searchBranch(branch){
+		if(branch.label.toLowerCase().indexOf($scope.searchTerm.toLowerCase()) != -1){
+			console.log(branch.label,$scope.searchTerm,branch.label.toLowerCase().indexOf($scope.searchTerm.toLowerCase()));
+			$scope.searchTree.push(branch);
+		}
+		if(branch.children.length>0){
+			for(var i=0;i<branch.children.length;i++){
+				searchBranch(branch.children[i]);
+			}
+		}
+	}
+
+	function emptySearch(){
+		$scope.searchTree=[];
+		return;
+	}
+	$scope.searchFiles = function() {
+		emptySearch();
+      if (!$scope.searchTerm) return true;
+
+      	for(var b=0;b<$scope.explorer.length;b++){
+      		searchBranch($scope.explorer[b]);
+      	}
+  	};
+
 	$scope.$on('saveAs', function(event,file){
 		$scope.fileToSave = file;
 		document.getElementById('saveFile').click();
