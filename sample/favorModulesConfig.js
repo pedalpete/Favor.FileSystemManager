@@ -133,12 +133,24 @@ var config = {
 		"name":"Favor.FileSystemManager",
 		"version":"0.0.1",
 		"jsPaths":[
-			"scripts/favorFileSystem.js"
+			"../dist/favorFileSystem.js"
 		],
 		"dependencies":{
 			"angular":">=1.2.x"
 		},
 		"angularModule":true
+	},
+    "angularBootstrapNavTree":{
+		"name":"angularBootstrapNavTree",
+		"version":"0.1.6",
+		"jsPaths":[
+		"vendor/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"
+		],
+		"dependencies":{
+			"angular":">=1.2.x"
+		},
+		"angularModule":true
+
 	}
 
 }

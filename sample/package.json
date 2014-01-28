@@ -1,8 +1,8 @@
 {
-	"name":"FavorIde",
+	"name":"Favor.FileSystemManager.Sample",
 	"main":"index.html",
 	"window": {
-	    "title": "favorIde",
+	    "title": "Favor.FileSystemManager.Sample",
 	    "toolbar": true,
 	    "frame": true,
 	    "width": 800,
@@ -12,5 +12,12 @@
 	    "min_height": 200,
 	    "max_width": 800,
 	    "max_height": 600
-	}
+	},
+    "engines": {
+        "node": ">=0.8.0"
+    },
+    "scripts": {
+        "test": "grunt test",
+        "start": "nodewebkit"
+    }
 } 
