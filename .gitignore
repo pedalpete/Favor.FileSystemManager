@@ -1,5 +1,4 @@
 node_modules/
-dist
 .tmp
 .sass-cache
 sample/bower_components/
