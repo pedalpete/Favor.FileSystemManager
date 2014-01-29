@@ -161,4 +161,9 @@ angular.module('Favor.FileSystemManager',[])
 	$scope.$on('viewFoldersChanged',function(){
 		$scope.foldersVisible = FavorFileSystemModel.folderVisibility();
 	});
+
+	$scope.$on('favorSearch',function(event,searchTerm){
+		$scope.searchTerm=searchTerm;
+		$scope.searchFiles();
+	});
 });
